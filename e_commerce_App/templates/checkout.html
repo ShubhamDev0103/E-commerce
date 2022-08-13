@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main_content %}
+
+{% block title %} {{checkout}} {% endblock %}
+<div class="head-bread">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="index-2.html">Home</a></li>
+            <!-- <li><a href="products-2.html">Products</a></li> -->
+            <li class="active" style="text-transform: uppercase;">CART</li>
+        </ol>
+    </div>
+</div>
+<div class="check">
+    <div class="container">
+        <div class="col-md-3 cart-total">
+
+            <a class="continue" href="/">Products Details</a>
+            <div class="price-details">
+                <span>Delivery Charges :</span>
+                {% if d_charges %}
+                <span class="total1" style="color: #fb4c29;">{{d_charges}}</span>
+                {% else %}
+                <span class="total1" style="color: #fb4c29;">Free</span>
+                {% endif %}
+                <span style="width:100%;">Products Name</span>
+                {% for pn in cart_count.cart_items %}
+                <div style="color: #fb4c29; font-family: 'Pathway Gothic One'; font-size: 15px;">
+                    {{pn.product_name}} &nbsp; : &nbsp; {{pn.total_price}}</br>
+                </div>
+                {% endfor %}
+                <div class="clearfix"></div>
+            </div>
+            <hr class="featurette-divider">
+            <ul class="total_price">
+                <li class="last_price">
+                    <h4>TOTAL</h4>
+                </li>
+                <li class="last_price"><span>&#8377; {{cart_count.total_cart_price}}</span></li>
+                <div class="clearfix"> </div>
+            </ul>
+            <div class="clearfix"></div>
+            <a class="order" href="{% url 'buynow' %}">buy all product</a>
+        </div>
+        <div class="col-md-9 cart-items">
+                {% if cart_items %}
+                <h1>My Shopping Bag ()</h1>
+                {% else %}
+                <h1>My Shopping Bag ({{c.id.count}})</h1>
+                {% endif %}
+                <div class="cart-header">
+                    {% for product in cart_count.cart_items %}
+                    <a href="" class="remove_cart">
+                        <div class="close1">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true" pid="{{ product.id }}">
+                            </span>
+                        </div>
+                    </a>
+                    <a href="" style="color: black; text-decoration: none;">
+                        <div class="cart-sec simpleCart_shelfItem">
+                            <div class="cart-item cyc">
+                                
+                                <img src="{{product.shoes_img.url}}" class="img-responsive" alt="" />
+                            </div>
+                            <div class="cart-item-info">
+                                <ul class="qty">
+                                    <li>
+                                        <p>Size : {{product.c_size}} US</p>
+                                    </li>
+                                    <li>
+                                        <p>QTC : {{product.qty}}</p>
+                                    </li>
+                                    <li>
+                                        <p>Price : &#8377; {{product.total_price}}</p>
+                                    </li>
+                    </a>
+                  <a class="col-md-3 order"  style="float: right;"><button  type="submit" style="background: none; text-transform: uppercase; border: none;" {{product.id}}> buy now </button></a>
+
+                  <!-- <a  href="{% url 'buynow' %}" pid="{{ product.id }}">buy
+                    now</a> -->
+                    </ul>
+                </div>
+            <div class="clearfix"></div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+</div>
+</div>
+{% comment %}
+<script>$(document).ready(function (c) {
+        $('.close1').on('click', function (c) {
+            $('.cart-header').fadeOut('slow', function (c) {
+                $('.cart-header').remove();
+            });
+        });
+    });
+</script> {% endcomment %}
+
+
+<script>
+    $(.remove_cart).click(function () {
+        var id = $(this).attr("pid").toString();
+        var eml = this
+
+        $ajex({
+            type: "GET",
+            url: "/remove_cart",
+            data: {
+                prod_id: id
+            }
+                success: function (data) {
+                document.getElementById("price").innerText = data.price
+                document.getElementById("total_cart_price").innerText = data.total_cart_price
+            }
+        })
+    })
+</script>
+
+</body>
+
+</html>
+{% endblock %}

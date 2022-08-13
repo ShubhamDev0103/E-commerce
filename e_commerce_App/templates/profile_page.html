@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{profile_page}} {% endblock %}
+{% block main_content %}
+<div class="reg-form">
+    <div class="container">
+        <div class="reg">
+            <!-- <p>Welcome, please enter the following details to continue.</p>
+            <p>If you have previously registered with us, <a href="#">click here</a></p> -->
+             <form  method="post" action="{% url 'profile_update' %}">	
+                 {% csrf_token %}
+                <ul>
+                    <li class="text-info">fullname: </li>
+                    <li><input type="text" value="{{profile_data.Fullname}}" name="full_name"></li>
+                </ul>	
+                <ul>
+                    <li class="text-info">Address: </li>
+                    <li><input type="text" value="{{profile_data.Address}}" name="address"></li>
+                </ul>	
+                <ul>
+                    <li class="text-info">mobile: </li>
+                    <li><input type="tel"  value="{{profile_data.Mobile}}" name="mobile"></li>
+                </ul>	
+                <ul>
+                    <li class="text-info">city: </li>
+                    <li><input type="text" value="{{profile_data.City}}" name="city"></li>
+                </ul>	
+                <ul>
+                    <li class="text-info">state: </li>
+                    <li><input type="text" value="{{profile_data.State}}" name="state"></li>
+                </ul>	
+                <input type="submit" value="Update">
+                <p class="click">By clicking this button, you are agree to my  <a href="#">Policy Terms and Conditions.</a></p> 
+            </form>
+        </div>
+    </div>
+</div>
+    
+    {% endblock %}
+
+</body>
+
+</html>

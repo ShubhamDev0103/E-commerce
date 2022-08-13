@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+
+<div class="main-box" style="display: flex; justify-content: center; padding: 0px 30px;">
+
+    <div class="col-md-4 cart-total">
+        <a class="continue" href="">Totel Summary</a>
+        <div class="price-details">
+            {% for pi in product_items.product_list %}
+            <hr>
+            <span>Quantity:</span>
+            <span class="total1" style="color: #fb4c29;">{{pi.p_qty}}</span>
+            <span>Size:</span>
+            <span class="total1" style="color: #fb4c29;">{{pi.p_size}}</span>
+            <span style="width:100%;">Products Name</span>
+            <div style="color: #fb4c29; font-family: 'Pathway Gothic One'; font-size: 15px;">
+                {{pi.p_name}} &nbsp; : {{pi.p_total_price}} &nbsp; </br>
+            </div>
+            {% endfor %}
+            <div class="clearfix"></div>
+        </div>
+        <hr class="featurette-divider">
+        <ul class="total_price">
+            <li class="last_price">
+                <h4>TOTAL</h4>
+            </li>
+            <li class="last_price"><span>&#8377;{{product_items.total_cart_price}}</span></li>
+            <div class="clearfix"> </div>
+        </ul>
+        <div class="clearfix"></div>
+        <a class="order" href="#">continue</a>
+    </div>
+
+
+    <div class="col-md-5 cart-total">
+        <a class="continue" href="/">Your Shipping Address</a>
+        <div class="price-details">
+            <h3>Address</h3>
+            {% for ad in add %}
+            <span name="cust_id" value="{{ad.id}}">{{ad.Address}}</span>
+            {% endfor %}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr class="featurette-divider">
+    <!-- <a class="order" href="#">buy all product</a> -->
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} {{signup}} {% endblock %}
+
+{% block main_content %}
+        <div class="head-bread">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li><a href="index-2.html">Home</a></li>
+                    <li><a href="register.html">LOGIN</a></li>
+                    <li class="active">REGISTER</li>
+                </ol>
+            </div>
+        </div>
+	<div class="reg-form">
+		<div class="container">
+			<div class="reg">
+				<h3>Register Now</h3>
+				<p>Welcome, please enter the following details to continue.</p>
+				<p>If you have previously registered with us, <a href="#">click here</a></p>
+				 <form  method="post" action="{% url 'signup' %}" >	
+                     {% csrf_token %}
+					<ul>
+						<li class="text-info" >Email: </li>
+						<li><input style="width:50%; padding: 8px;" type="email" value="" name="email"></li>
+					</ul>
+					<ul>
+						<li class="text-info">Password: </li>
+						<li><input type="password" value="" name="password"></li>
+					</ul>	
+					<input type="submit" value="Register Now">
+					<p class="click">By clicking this button, you are agree to my  <a href="#">Policy Terms and Conditions.</a></p> 
+				</form>
+			</div>
+		</div>
+	</div>
+        
+        {% endblock %}
+
+	</body>
+
+</html>

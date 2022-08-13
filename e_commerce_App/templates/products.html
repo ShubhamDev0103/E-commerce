@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{products}} {% endblock %}
+{% block main_content %}
+<div class="head-bread">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="index-2.html">Home</a></li>
+            <li class="active"style="text-transform: uppercase;" >{{items}}</li>
+        </ol>
+    </div>
+</div>
+<div class="products-gallery">
+    <div class="container">
+        <div class="col-md-9 grid-gallery">
+            {% for prod in men_products %}
+            <div class="col-md-4 grid-stn simpleCart_shelfItem">
+                <!-- normal -->
+                <div class="ih-item square effect3 bottom_to_top">
+                    <div class="bottom-2-top">
+                        <div class="img"><img src="{{prod.shoes_img.url}}" alt="/" class="img-responsive gri-wid">
+                            {% comment %} ID:{{prod.id}} {% endcomment %}
+                        </div>
+                        <div class="info">
+                            <div class="pull-left styl-hdn">
+                                <!-- <h3>{{prod.title}}</h3> -->
+                                <h3>{{prod.title}}</h3>
+                                <h3>Price: &#8377; {{prod.selling_price}}</h3>
+                                <h5>You Save:<span
+                                        style="text-decoration-line: line-through;  font-family: 'Fredoka One', cursive; letter-spacing: 1px;">
+                                        <b>&#8377;</b>{{prod.discount_price}}</span></h5>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end normal -->
+                <div class="quick-view">
+                    <a href="{% url 'Quick_view' prod.id %}">Quick view</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-3 grid-details">
+            <div class="grid-addon">
+                <section class="sky-form">
+                    <div class="product_right">
+                        <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Categories
+                        </h4>
+                        <div class="tab1">
+                            <ul class="place">
+                                <li class="sort">Shoes</li>
+                                <li class="by"><img src="{% static 'images/do.png' %}" alt=""></li>
+                                <div class="clearfix"> </div>
+                            </ul>
+                            
+                            <div class="single-bottom">
+                                <!-- <a href="#">
+                                    <p>Under 1000</p>
+                                </a> -->
+                                <a href="{% url 'products' 'Under-10000' %}">
+                                    <p>Under 10000</p>
+                                </a>
+                                <!-- <a href="#">
+                                    <p>Below 1000</p>
+                                </a> -->
+                                <a href="{% url 'products' 'Below-5000' %}" >
+                                    <p>Below 5000</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="tab2">
+                            <ul class="place">
+                                <li class="sort">Clothing</li>
+                                <li class="by"><img src="{% static 'images/do.png' %}" alt=""></li>
+                                <div class="clearfix"> </div>
+                            </ul>
+                            <div class="single-bottom">
+                                <a href="#">
+                                    <p>Tracks</p>
+                                </a>
+                                <a href="#">
+                                    <p>Tees</p>
+                                </a>
+                                <a href="#">
+                                    <p>Hair bands</p>
+                                </a>
+                                <a href="#">
+                                    <p>Wrist bands</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="tab3">
+                            <ul class="place">
+                                <li class="sort">Gear</li>
+                                <li class="by"><img src="{% static 'images/do.png' %}" alt=""></li>
+                                <div class="clearfix"> </div>
+                            </ul>
+                            <div class="single-bottom">
+                                <a href="#">
+                                    <p>Running app</p>
+                                </a>
+                                <a href="#">
+                                    <p>Training club</p>
+                                </a>
+                                <a href="#">
+                                    <p>Nike Fuel+Band se</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="tab4">
+                            <ul class="place">
+                                <li class="sort">Casual</li>
+                                <li class="by"><img src="{% static 'images/do.png' %}" alt=""></li>
+                                <div class="clearfix"> </div>
+                            </ul>
+                            <div class="single-bottom">
+                                <a href="#">
+                                    <p>Casual FootWear</p>
+                                </a>
+                                <a href="#">
+                                    <p>Casual Clothing</p>
+                                </a>
+                                <a href="#">
+                                    <p>Casual Watch</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="tab5">
+                            <ul class="place">
+                                <li class="sort">Gym</li>
+                                <li class="by"><img src="{% static 'images/do.png' %}" alt=""></li>
+                                <div class="clearfix"> </div>
+                            </ul>
+                            <div class="single-bottom">
+                                <a href="#">
+                                    <p>Gym FootWear</p>
+                                </a>
+                                <a href="#">
+                                    <p>Gym Clothing</p>
+                                </a>
+                                <a href="#">
+                                    <p>Gym Watch</p>
+                                </a>
+                            </div>
+                        </div>
+                        <!--script-->
+                        <script>
+                            $(document).ready(function () {
+                                $(".tab1 .single-bottom").hide();
+                                $(".tab2 .single-bottom").hide();
+                                $(".tab3 .single-bottom").hide();
+                                $(".tab4 .single-bottom").hide();
+                                $(".tab5 .single-bottom").hide();
+
+                                $(".tab1 ul").click(function () {
+                                    $(".tab1 .single-bottom").slideToggle(300);
+                                    $(".tab2 .single-bottom").hide();
+                                    $(".tab3 .single-bottom").hide();
+                                    $(".tab4 .single-bottom").hide();
+                                    $(".tab5 .single-bottom").hide();
+                                })
+                                $(".tab2 ul").click(function () {
+                                    $(".tab2 .single-bottom").slideToggle(300);
+                                    $(".tab1 .single-bottom").hide();
+                                    $(".tab3 .single-bottom").hide();
+                                    $(".tab4 .single-bottom").hide();
+                                    $(".tab5 .single-bottom").hide();
+                                })
+                                $(".tab3 ul").click(function () {
+                                    $(".tab3 .single-bottom").slideToggle(300);
+                                    $(".tab4 .single-bottom").hide();
+                                    $(".tab5 .single-bottom").hide();
+                                    $(".tab2 .single-bottom").hide();
+                                    $(".tab1 .single-bottom").hide();
+                                })
+                                $(".tab4 ul").click(function () {
+                                    $(".tab4 .single-bottom").slideToggle(300);
+                                    $(".tab5 .single-bottom").hide();
+                                    $(".tab3 .single-bottom").hide();
+                                    $(".tab2 .single-bottom").hide();
+                                    $(".tab1 .single-bottom").hide();
+                                })
+                                $(".tab5 ul").click(function () {
+                                    $(".tab5 .single-bottom").slideToggle(300);
+                                    $(".tab4 .single-bottom").hide();
+                                    $(".tab3 .single-bottom").hide();
+                                    $(".tab2 .single-bottom").hide();
+                                    $(".tab1 .single-bottom").hide();
+                                })
+                            });
+                        </script>
+                        <!-- script -->
+                </section>
+
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+{% endblock %}
+</body>
+
+</html>

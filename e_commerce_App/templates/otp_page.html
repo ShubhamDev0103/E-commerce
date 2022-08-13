@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{signin}} {% endblock %}
+{% block main_content %}
+        <div class="head-bread">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li><a href="index-2.html">HOME</a></li>
+                    <li class="active">LOGIN</li>
+                </ol>
+            </div>
+        </div>
+        <div class="login">
+            <div class="container">
+                <div class="login-grids" style="display: flex;justify-content: center;">
+                    <div class="col-md-6 log">
+                             <h3>OTP :</h3>
+                             <div class="strip"></div>
+                             <form method="post" action="{% url 'otp_verify' %}">
+                                 {% csrf_token %}
+                                 <input type="password" value="" name="otp"><br>					
+                                 <input type="submit" value="Login">
+                             </form>
+                            <a href="#">Forgot Password ?</a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+	</body>
+</html>
