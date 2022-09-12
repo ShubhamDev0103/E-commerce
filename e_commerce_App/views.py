@@ -6,6 +6,7 @@ from .models import *
 from django.views import View
 from django.conf import settings
 from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_exempt
 
 titles = {
     'index': 'N-AIR Home',
@@ -154,6 +155,8 @@ class Quick_view(View):
         return render(request, 'single.html',context)
 
 # signup_page functionality
+
+@csrf_exempt
 def signup(request): 
     request.session['regi_data'] = {
         'email': request.POST['email'],
@@ -163,6 +166,8 @@ def signup(request):
     return redirect('otp_page')
 
 # signin_page functionality
+
+@csrf_exempt
 def signin(request):
     if request.method == 'POST':
         master = Master.objects.get(Email=request.POST['email'])
@@ -174,6 +179,7 @@ def signin(request):
             return render(request,'signin_page.html')
 
 # profile_page functionality
+@csrf_exempt
 def profile_page(request):
     if 'email' in request.session:
         profile_data(request)
